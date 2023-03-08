@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice //Indica que a classe trata possiveis erros nas requisiçoes;
 public class ResourceExceptionHandler {
 
+    //Esse metodo vai servir para tratar o ObjectNotFoundException
     @ExceptionHandler(ObjectNotFoundException.class)
     public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest request) {
 
