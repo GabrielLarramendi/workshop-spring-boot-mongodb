@@ -2,10 +2,12 @@ package com.larramendi.workshopmongo.services;
 
 import com.larramendi.workshopmongo.domain.User;
 import com.larramendi.workshopmongo.repository.UserRepository;
+import com.larramendi.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 //A classe de serviço tem que conversar com a classe repositório
 
@@ -17,6 +19,11 @@ public class UserService {
 
     public List<User> findAll() {
         return repo.findAll();
+    } //Retorna todos os users
+
+    public User findById(String id) { //Retorna apenas o user desejado
+        Optional<User> obj = repo.findById(id);
+        return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
 }
