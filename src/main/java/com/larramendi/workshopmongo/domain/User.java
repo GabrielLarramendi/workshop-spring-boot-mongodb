@@ -19,7 +19,7 @@ public class User implements Serializable {
     private String name;
     private String email;
 
-    @DBRef(lazy = true)
+    @DBRef(lazy = true) //Informa que no banco de dados essa lista será uma referência;
     private List<Post> posts = new ArrayList<>();
 
     public User() {
