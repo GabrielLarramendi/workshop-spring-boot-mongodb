@@ -2,17 +2,14 @@ package com.larramendi.workshopmongo.resources;
 
 import com.larramendi.workshopmongo.domain.Post;
 import com.larramendi.workshopmongo.domain.User;
-import com.larramendi.workshopmongo.dto.UserDto;
+import com.larramendi.workshopmongo.dto.UserDTO;
 import com.larramendi.workshopmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,23 +21,23 @@ public class UserResource {
     private UserService service;
 
     @RequestMapping(method = RequestMethod.GET) //Método para o endpoint //Get pq é uma requisição de retornar os dados;
-    public ResponseEntity<List<UserDto>>  findAll() {
+    public ResponseEntity<List<UserDTO>>  findAll() {
 
         List<User> list = service.findAll();
-        List<UserDto> listDto = list.stream().map(UserDto::new).collect(Collectors.toList());
+        List<UserDTO> listDto = list.stream().map(UserDTO::new).collect(Collectors.toList());
 
         return ResponseEntity.ok().body(listDto);
     }
 
     @RequestMapping(value=("/{id}"), method = RequestMethod.GET) //Value id para retornar apenas o user desejado
-    public ResponseEntity<UserDto>  findById(@PathVariable String id) { //Annotation diz que o parametro Id tem que ser o mesmo da url
+    public ResponseEntity<UserDTO>  findById(@PathVariable String id) { //Annotation diz que o parametro Id tem que ser o mesmo da url
         User obj = service.findById(id);
 
-        return ResponseEntity.ok().body(new UserDto(obj));
+        return ResponseEntity.ok().body(new UserDTO(obj));
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@RequestBody UserDto objDto) {
+    public ResponseEntity<Void> insert(@RequestBody UserDTO objDto) {
         User obj = service.fromDTO(objDto);
         obj = service.insert(obj);
 
@@ -55,7 +52,7 @@ public class UserResource {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody UserDto objDto, @PathVariable String id) {
+    public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
         User obj = service.fromDTO(objDto);
         obj.setId(id);
         obj = service.update(obj);

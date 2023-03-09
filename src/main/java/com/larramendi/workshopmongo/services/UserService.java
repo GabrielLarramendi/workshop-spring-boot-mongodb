@@ -1,7 +1,7 @@
 package com.larramendi.workshopmongo.services;
 
 import com.larramendi.workshopmongo.domain.User;
-import com.larramendi.workshopmongo.dto.UserDto;
+import com.larramendi.workshopmongo.dto.UserDTO;
 import com.larramendi.workshopmongo.repository.UserRepository;
 import com.larramendi.workshopmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +47,7 @@ public class UserService {
         newObj.setEmail(obj.getEmail());
     }
 
-    public User fromDTO(UserDto objDto) {
+    public User fromDTO(UserDTO objDto) {
         return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 
